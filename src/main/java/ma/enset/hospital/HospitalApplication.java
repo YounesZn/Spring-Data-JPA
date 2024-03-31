@@ -1,22 +1,20 @@
 package ma.enset.hospital;
 
 import ma.enset.hospital.entities.Patient;
-import ma.enset.hospital.repository.ProductRepository;
+import ma.enset.hospital.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class HospitalApplication implements CommandLineRunner  {
     @Autowired
-    ProductRepository productRepository;
+    PatientRepository productRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(HospitalApplication.class, args);
@@ -30,5 +28,10 @@ public class HospitalApplication implements CommandLineRunner  {
         all.forEach(patient -> {
             patient.toString();
         });
+        Optional<Patient> byId = productRepository.findById(Long.valueOf(2));
+        System.out.println(byId.toString());
+        productRepository.setUserInfoById("Added",2);
+        productRepository.deleteById(2L);
+
     }
 }
